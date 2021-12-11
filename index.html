@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+    <div id="clock-container">
+
+        <div id="clock-face">
+            Display current time using JS
+        </div>
+
+        <div id="set-alarm-container">
+            <div id="set-alarm-time">
+                <select name="hours" id="hours" required>
+                    <option value="default-hours" selected disabled>HH</option>
+                </select>
+                <span>:</span>
+                <select name="minutes" id="minutes" required>
+                    <option value="default-minutes" selected disabled>MM</option>
+                </select>
+                <span>:</span>
+                <select name="seconds" id="seconds" required>
+                    <option value="default-seconds" selected disabled>SS</option>
+                </select>
+                <select name="am-pm" id="am-pm">
+                    <option value="AM" id="am">AM</option>
+                    <option value="PM" id="pm">PM</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
