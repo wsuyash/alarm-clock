@@ -12,3 +12,14 @@ select {
     border: none;
     font-size: 14px;
 }
+
+#clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#clock-face {
+    font-size: 48px;
+}
