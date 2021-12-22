@@ -13,22 +13,27 @@ select {
     font-size: 16px;
 }
 
+ul {
+	list-style: none;
+}
+
 #clock-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+	gap: 2rem;
 	max-width: 40vw;
-	margin: auto;
+	margin: 5rem auto 0;
 	border: 1px solid black;
 }
 
 #clock-face {
 	margin-bottom: 1rem;
-    font-size: 48px;
+    font-size: 64px;
 }
 
-#set-alarm-container {
+.set-new-alarm-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -36,8 +41,35 @@ select {
 }
 
 .btn {
+	width: 8rem;
 	font-size: 16px;
 	padding: 0.25rem 1rem;
+	/* border: 1px solid black; */
 	border: none;
 	cursor: pointer;
+}
+
+#alarms-heading {
+	width: 90%;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid grey;
+}
+
+#set-alarms-list {
+	width: 50%;
+}
+
+#set-alarms-list li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 2rem;
+	margin-bottom: 1rem;
+}
+
+#set-alarms-time p {
+	font-size: 24px;
 }

@@ -16,18 +16,18 @@
             <!-- Displaying current time here using function showTime() in index.js -->
         </div>
 
-        <div id="set-alarm-container">
-            <div id="set-alarm-time">
+        <div class="set-new-alarm-container">
+            <div id="set-new-alarm-time">
                 <select name="hours" id="hours" required>
-                    <option value="default-hours" selected disabled>HH</option>
+                    <option value="default-hours" selected>HH</option>
                 </select>
                 <span>:</span>
                 <select name="minutes" id="minutes" required>
-                    <option value="default-minutes" selected disabled>MM</option>
+                    <option value="default-minutes" selected>MM</option>
                 </select>
                 <span>:</span>
                 <select name="seconds" id="seconds" required>
-                    <option value="default-seconds" selected disabled>SS</option>
+                    <option value="default-seconds" selected>SS</option>
                 </select>
                 <select name="am-pm" id="am-pm">
                     <option value="AM" id="am">AM</option>
@@ -37,6 +37,11 @@
 			<button class="btn set-alarm-btn" id="set-alarm">Set Alarm</button>
         </div>
 
+		<div id="alarms-heading">Alarms</div>
+
+		<ul id="set-alarms-list">
+			<!-- List of Set Alarms (added dynamically using JavaScript) -->
+		</ul>
     </div>
 
     <script src="./index.js"></script>

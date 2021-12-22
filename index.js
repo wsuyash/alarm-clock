@@ -1,7 +1,5 @@
-// Displaying the current time in the clock-face
-const clockFace = document.getElementById('clock-face');
-function showTime() {
-	const date = new Date(); // Getting current date
+// Getting the current time in the desired format
+function getCurrentTime(date) {
 	let hour = date.getHours(); // Getting current hour
 	let minute = date.getMinutes(); // Getting current minutes
 	let second = date.getSeconds(); // Getting current seconds
@@ -24,7 +22,14 @@ function showTime() {
 	minute = (minute < 10) ? ("0" + minute) : minute;
 	second = (second < 10) ? ("0" + second) : second;
 
-	clockFace.innerHTML = hour + " : " + minute + " : " + second + " " + ampm;
+	return hour + ":" + minute + ":" + second + " " + ampm;
+}
+
+// Displaying the current time in the clock-face
+const clockFace = document.getElementById('clock-face');
+function showTime() {
+	const date = new Date(); // Getting current date
+	clockFace.innerHTML = getCurrentTime(date);
 }
 setInterval(showTime, 1000); // Running showTime() every second to update the time
 
@@ -65,8 +70,12 @@ if (date.getHours() >= 12) {
 }
 
 // Set Alarm funcionality
-const setAlarmBtn = document.getElementById('set-alarm');
+const setAlarmBtn = document.getElementById('set-alarm'); // applying click event on "Set Alarm" button
 
+let alarmsArray = []; // List of alarms
+let alarmTimeout;
+
+// Function to set the alarm
 function setAlarm() {
 	let getHours = document.getElementById('hours').value;
 	let getMinutes = document.getElementById('minutes').value;
@@ -91,18 +100,81 @@ function setAlarm() {
 	const month = currentDateTime.getMonth();
 	const day = currentDateTime.getDate();
 
-	const alarmDateTime = new Date(year + "-" + (month + 1) + "-" + (day) + " " + getHours + ":" + getMinutes + ":" + getSeconds);
-	
+	// Converting user-input to proper JavaScript Date() format
+	const alarmDateTime = new Date(year + "-" + (month + 1) + "-" + day + " " + getHours + ":" + getMinutes + ":" + getSeconds);
+	if(isNaN(alarmDateTime)) {
+		alert("Invalid Time")
+		return;
+	}	
+
  	if (currentDateTime > alarmDateTime) {
 		alert('The time you have set has already passed. Try a time in the future.');
 		return;
 	}
 
-	let timeToAlarm = alarmDateTime - currentDateTime;
-	setTimeout(ringAlarm, timeToAlarm);
+	let timeToAlarm = alarmDateTime - currentDateTime; // Time until alarm rings
+
+	alarmTimeout = setTimeout(ringAlarm, timeToAlarm); // Setting alarm
+	
+	// Inserting new alarm into alarmsArray
+	alarmsArray.push(alarmDateTime);
+	// alarmsArray.sort(); // Sorting the alarms in ascending order
+
+	// Passing the index of new alarm to display
+	displayNewAlarm(alarmsArray.indexOf(alarmDateTime), alarmTimeout);
 }
 setAlarmBtn.addEventListener('click', setAlarm);
 
+// Function to ring the alarm
 function ringAlarm() {
-	alert('Alarm ringing...');
+	const time = getCurrentTime(new Date());
+	alert('Alarm ringing for ' + time + '... ');
+	deleteAlarmAfterRinging(time); // Delete the alarm after it rings
 }
+
+// List of set alarms
+function displayNewAlarm(index, timeout) {
+	let time = alarmsArray[index];
+
+	let setAlarmsList = document.getElementById('set-alarms-list');
+	let newAlarm = document.createElement('li');
+	setAlarmsList.appendChild(newAlarm);
+	newAlarm.setAttribute("class", "set-alarms-container");
+
+	let newP = document.createElement('p');
+	let newDeleteButton = document.createElement('button');
+	newAlarm.appendChild(newP);
+	newAlarm.appendChild(newDeleteButton);
+	newP.setAttribute("class", "alarm-time");
+	newDeleteButton.setAttribute("class", "btn delete-alarm-btn")
+	newDeleteButton.setAttribute("id", timeout);
+	newDeleteButton.innerHTML = "Delete";
+
+	newP.innerHTML = getCurrentTime(time);
+}
+
+// Delete alarm after it rings
+const alarms = document.getElementsByClassName('set-alarms-container');
+function deleteAlarmAfterRinging(alarmToDelete) {
+	for (let i = 0; i < alarms.length; i++) {
+		if (alarms[i].firstChild.innerHTML === alarmToDelete){
+			alarms[i].remove();
+			alarmsArray.splice(i, 1);
+		}
+	}
+}
+
+// Delete Alarms using "Delete" button
+document.querySelector('ul').addEventListener('click', function(event) {
+	if(event.target.tagName.toLowerCase() == 'button') {
+		// console.log(event.target);
+		// console.log(event.target.parentElement.firstChild)
+		indexOfAlarmToDelete = alarmsArray.indexOf(event.target.parentElement.firstChild.innerHTML);
+		console.log('Index to delete:', indexOfAlarmToDelete);
+		alarmsArray.splice(indexOfAlarmToDelete, 1);
+		console.log('Alarms: ', alarmsArray);
+		console.log('timeout:', event.target.id);
+		clearTimeout(event.target.id);
+		event.target.parentElement.remove();
+	}
+});
