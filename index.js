@@ -143,6 +143,8 @@ function displayNewAlarm(index, timeout) {
 
 	let newP = document.createElement('p');
 	let newDeleteButton = document.createElement('button');
+	let icon = document.createElement('i');
+	newAlarm.appendChild(icon).setAttribute( "class", "fa-solid fa-bell");;
 	newAlarm.appendChild(newP);
 	newAlarm.appendChild(newDeleteButton);
 	newP.setAttribute("class", "alarm-time");
@@ -167,13 +169,8 @@ function deleteAlarmAfterRinging(alarmToDelete) {
 // Delete Alarms using "Delete" button
 document.querySelector('ul').addEventListener('click', function(event) {
 	if(event.target.tagName.toLowerCase() == 'button') {
-		// console.log(event.target);
-		// console.log(event.target.parentElement.firstChild)
 		indexOfAlarmToDelete = alarmsArray.indexOf(event.target.parentElement.firstChild.innerHTML);
-		console.log('Index to delete:', indexOfAlarmToDelete);
 		alarmsArray.splice(indexOfAlarmToDelete, 1);
-		console.log('Alarms: ', alarmsArray);
-		console.log('timeout:', event.target.id);
 		clearTimeout(event.target.id);
 		event.target.parentElement.remove();
 	}
