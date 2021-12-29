@@ -118,7 +118,6 @@ function setAlarm() {
 	
 	// Inserting new alarm into alarmsArray
 	alarmsArray.push(alarmDateTime);
-	// alarmsArray.sort(); // Sorting the alarms in ascending order
 
 	// Passing the index of new alarm to display
 	displayNewAlarm(alarmsArray.indexOf(alarmDateTime), alarmTimeout);
@@ -159,7 +158,6 @@ function displayNewAlarm(index, timeout) {
 const alarms = document.getElementsByClassName('set-alarms-container');
 function deleteAlarmAfterRinging(alarmToDelete) {
 	for (let i = 0; i < alarms.length; i++) {
-		// if (alarms[i].firstChild.innerHTML === alarmToDelete){
 		if (alarms[i].firstChild.nextSibling.innerHTML === alarmToDelete){
 			alarms[i].remove();
 			alarmsArray.splice(i, 1);
