@@ -73,7 +73,7 @@ if (date.getHours() >= 12) {
 const setAlarmBtn = document.getElementById('set-alarm'); // applying click event on "Set Alarm" button
 
 let alarmsArray = []; // List of alarms
-let alarmTimeout;
+let alarmTimeout; // Variable used to clearTimeout for deleting alarms
 
 // Function to set the alarm
 function setAlarm() {
@@ -159,7 +159,8 @@ function displayNewAlarm(index, timeout) {
 const alarms = document.getElementsByClassName('set-alarms-container');
 function deleteAlarmAfterRinging(alarmToDelete) {
 	for (let i = 0; i < alarms.length; i++) {
-		if (alarms[i].firstChild.innerHTML === alarmToDelete){
+		// if (alarms[i].firstChild.innerHTML === alarmToDelete){
+		if (alarms[i].firstChild.nextSibling.innerHTML === alarmToDelete){
 			alarms[i].remove();
 			alarmsArray.splice(i, 1);
 		}
