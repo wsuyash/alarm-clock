@@ -127,8 +127,8 @@ setAlarmBtn.addEventListener('click', setAlarm); // Click event listener on the 
 // Function to ring the alarm
 function ringAlarm() {
 	const time = getCurrentTime(new Date());
-	alert('Alarm ringing for ' + time + '... '); // Alerting the user
 	deleteAlarmAfterRinging(time); // Delete the alarm after it rings
+	alert('Alarm ringing for ' + time + '... '); // Alerting the user
 }
 
 // List of set alarms
