@@ -114,7 +114,7 @@ function setAlarm() {
 
 	let timeToAlarm = alarmDateTime - currentDateTime; // Time until alarm rings
 
-	alarmTimeout = setTimeout(ringAlarm, timeToAlarm); // Setting alarm
+	alarmTimeout = setTimeout(ringAlarm, timeToAlarm); // Setting alarm and storing its timeout so we can delete this alarm using this variable later
 	
 	// Inserting new alarm into alarmsArray
 	alarmsArray.push(alarmDateTime);
@@ -122,55 +122,64 @@ function setAlarm() {
 	// Passing the index of new alarm to display
 	displayNewAlarm(alarmsArray.indexOf(alarmDateTime), alarmTimeout);
 }
-setAlarmBtn.addEventListener('click', setAlarm);
+setAlarmBtn.addEventListener('click', setAlarm); // Click event listener on the 'Set Alarm" button
 
 // Function to ring the alarm
 function ringAlarm() {
 	const time = getCurrentTime(new Date());
-	alert('Alarm ringing for ' + time + '... ');
+	alert('Alarm ringing for ' + time + '... '); // Alerting the user
 	deleteAlarmAfterRinging(time); // Delete the alarm after it rings
 }
 
 // List of set alarms
 function displayNewAlarm(index, timeout) {
-	let time = alarmsArray[index];
+	let time = alarmsArray[index]; // Get the alarm time to be displayed
 
-	let setAlarmsList = document.getElementById('set-alarms-list');
-	let newAlarm = document.createElement('li');
+	let setAlarmsList = document.getElementById('set-alarms-list'); // Get the parent 'ul' element
+	let newAlarm = document.createElement('li'); // Creating a new 'li' element
+
+	// Appending it to the parent, i.e., the 'ul' element with id='set-alarms-list' and setting the new 'li' element's attributes
 	setAlarmsList.appendChild(newAlarm);
 	newAlarm.setAttribute("class", "set-alarms-container");
 
+	// Creating a new 'i', 'p', and 'button' element for displaying alarm icon, alarm time, and delete button respectively
+	let icon = document.createElement('i');
 	let newP = document.createElement('p');
 	let newDeleteButton = document.createElement('button');
-	let icon = document.createElement('i');
-	newAlarm.appendChild(icon).setAttribute( "class", "fa-solid fa-bell");;
+
+	// Appending the newly created elements to the parent 'li' element
+	newAlarm.appendChild(icon);
 	newAlarm.appendChild(newP);
 	newAlarm.appendChild(newDeleteButton);
+
+	// Setting attributes for the newly created and appended elements
+	icon.setAtrribute( "class", "fa-solid fa-bell");
 	newP.setAttribute("class", "alarm-time");
 	newDeleteButton.setAttribute("class", "btn delete-alarm-btn")
 	newDeleteButton.setAttribute("id", timeout);
-	newDeleteButton.innerHTML = "Delete";
 
+	// Displaying info on the 'p' and 'delete button'
+	newDeleteButton.innerHTML = "Delete";
 	newP.innerHTML = getCurrentTime(time);
 }
 
 // Delete alarm after it rings
-const alarms = document.getElementsByClassName('set-alarms-container');
+const alarms = document.getElementsByClassName('set-alarms-container'); // Get all the set alarms from DOM
 function deleteAlarmAfterRinging(alarmToDelete) {
-	for (let i = 0; i < alarms.length; i++) {
-		if (alarms[i].firstChild.nextSibling.innerHTML === alarmToDelete){
-			alarms[i].remove();
-			alarmsArray.splice(i, 1);
+	for (let i = 0; i < alarms.length; i++) { // Looping through the displayed alarms to find the one to delete after it has rung
+		if (alarms[i].firstChild.nextSibling.innerHTML === alarmToDelete){ // If found
+			alarms[i].remove(); // Removing it from the alarms list
+			alarmsArray.splice(i, 1); // Removing it from the universal alarmsArray[] as well
 		}
 	}
 }
 
 // Delete Alarms using "Delete" button
-document.querySelector('ul').addEventListener('click', function(event) {
-	if(event.target.tagName.toLowerCase() == 'button') {
-		indexOfAlarmToDelete = alarmsArray.indexOf(event.target.parentElement.firstChild.innerHTML);
-		alarmsArray.splice(indexOfAlarmToDelete, 1);
-		clearTimeout(event.target.id);
-		event.target.parentElement.remove();
+document.querySelector('ul').addEventListener('click', function(event) { // Adding event listener to the parent of dynamically added elements
+	if(event.target.tagName.toLowerCase() == 'button') { // Adding event listener to the delete button
+		indexOfAlarmToDelete = alarmsArray.indexOf(event.target.parentElement.firstChild.innerHTML); // Getting the index of the alarm that is to be deleted from the alarmsArray
+		alarmsArray.splice(indexOfAlarmToDelete, 1); // Deleting the alarm from the alarmsArray
+		clearTimeout(event.target.id); // Clearing timeout so we don't get the browser alert
+		event.target.parentElement.remove(); // Deleting the container element that has the icon, alarm and delete button
 	}
 });
