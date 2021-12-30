@@ -138,3 +138,38 @@ ul {
 .alarm-time {
 	font-weight: 500;
 }
+
+/* Media queries for responsive design */
+@media screen and (max-width: 920px) {
+	#clock-container {
+		width: 80vw;
+	}
+
+}
+@media screen and (max-width: 460px) {
+	#clock-container {
+		width: 100vw;
+	}
+}
+
+@media screen and (max-width: 380px) {
+	#clock-face {
+		margin-bottom: 0;
+		font-size: 32px;
+	}
+
+	.set-new-alarm-container {
+		flex-direction: column;
+	}
+}
+
+@media screen and (max-width: 380px) {
+	#clock-container {
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	#set-alarms-list {
+		margin-bottom: -20px;
+	}
+}
