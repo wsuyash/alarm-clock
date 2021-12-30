@@ -1,56 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarm</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alarm</title>
 
-		<!-- Font Awesome CDN -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Font Awesome CDN -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-		<!-- CSS -->
-    <link rel="stylesheet" href="./style.css">
+	<!-- CSS -->
+	<link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    
-    <div id="clock-container">
 
-				<i class="fa-solid fa-clock" id="main-clock-icon"></i>
+	<div id="clock-container">
 
-        <div id="clock-face">
-            <!-- Displaying current time here using function showTime() in index.js -->
-        </div>
+		<!-- Clock icon/logo -->
+		<i class="fa-solid fa-clock" id="main-clock-icon"></i>
 
-        <div class="set-new-alarm-container">
-            <div id="set-new-alarm-time">
-                <select name="hours" id="hours" required>
-                    <option value="default-hours" selected>HH</option>
-                </select>
-                <span>:</span>
-                <select name="minutes" id="minutes" required>
-                    <option value="default-minutes" selected>MM</option>
-                </select>
-                <span>:</span>
-                <select name="seconds" id="seconds" required>
-                    <option value="default-seconds" selected>SS</option>
-                </select>
-                <select name="am-pm" id="am-pm">
-                    <option value="AM" id="am">AM</option>
-                    <option value="PM" id="pm">PM</option>
-                </select>
-            </div>
-						<button class="btn set-alarm-btn" id="set-alarm">Set Alarm</button>
-        </div>
+		<div id="clock-face">
+			<!-- Displaying current time here using function showTime() in index.js -->
+		</div>
 
+		<!-- Set Alarm Container -->
+		<div class="set-new-alarm-container">
+			
+			<!-- Set time input/options with Set Alarm Button container -->
+			<div id="set-new-alarm-time">
+				<select name="hours" id="hours" required>
+					<option value="default-hours" selected>HH</option>
+				</select>
+				<span>:</span>
+				<select name="minutes" id="minutes" required>
+					<option value="default-minutes" selected>MM</option>
+				</select>
+				<span>:</span>
+				<select name="seconds" id="seconds" required>
+					<option value="default-seconds" selected>SS</option>
+				</select>
+				<select name="am-pm" id="am-pm">
+					<option value="AM" id="am">AM</option>
+					<option value="PM" id="pm">PM</option>
+				</select>
+			</div>
+			<button class="btn set-alarm-btn" id="set-alarm">Set Alarm</button>
+		</div>
+
+		<!-- Alarms Heading after Set Alarm part -->
 		<div id="alarms-heading">Alarms</div>
 
 		<ul id="set-alarms-list">
 			<!-- List of Set Alarms (added dynamically using JavaScript) -->
 		</ul>
-    </div>
+	</div>
 
-		<!-- JavaScript -->
-    <script src="./index.js"></script>
+	<!-- JavaScript -->
+	<script src="./index.js"></script>
 </body>
+
 </html>
