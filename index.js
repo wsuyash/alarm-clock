@@ -143,17 +143,17 @@ function displayNewAlarm(index, timeout) {
 	newAlarm.setAttribute("class", "set-alarms-container");
 
 	// Creating a new 'i', 'p', and 'button' element for displaying alarm icon, alarm time, and delete button respectively
-	let icon = document.createElement('i');
+	let newIcon = document.createElement('i');
 	let newP = document.createElement('p');
 	let newDeleteButton = document.createElement('button');
 
 	// Appending the newly created elements to the parent 'li' element
-	newAlarm.appendChild(icon);
+	newAlarm.appendChild(newIcon);
 	newAlarm.appendChild(newP);
 	newAlarm.appendChild(newDeleteButton);
 
 	// Setting attributes for the newly created and appended elements
-	icon.setAtrribute( "class", "fa-solid fa-bell");
+	newIcon.setAttribute("class", "fa-solid fa-bell")
 	newP.setAttribute("class", "alarm-time");
 	newDeleteButton.setAttribute("class", "btn delete-alarm-btn")
 	newDeleteButton.setAttribute("id", timeout);
